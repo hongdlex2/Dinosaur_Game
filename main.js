@@ -16,8 +16,6 @@ var dino = {
     }
 }
 
-dino.draw()
-
 
 class Cactus{
     constructor(){
@@ -32,5 +30,27 @@ class Cactus{
     }
 }
 
-var cactus = new Cactus();
-cactus.draw()
+
+var timer = 0;
+var cactuses = [];
+
+function animate(){
+    requestAnimationFrame(animate);
+    timer++;
+    ctx.clearRect(0, 0 , canvas.width, canvas.height);
+
+    if(timer % 120 === 0){
+        var cactus = new Cactus();
+        cactuses.push(cactus);
+        
+    }
+    
+    cactuses.forEach((a)=>{
+        a.x--;
+        a.draw();
+    })
+    dino.draw();
+    
+}
+
+animate();
