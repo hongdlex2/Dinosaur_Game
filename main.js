@@ -41,7 +41,7 @@ class Cactus{
 
 var timer = 0;  //프레임 단위로 장애물을 표현하기 위해서 timer 변수 선언
 var cactuses = [];  //장애물을 보관한 공간(배열)
-var jumpTimer =0;   //dino(공룡 캐릭터)가 공중에 떠 있는 시간
+var jumpTimer =0;   //dino(공룡 캐릭터)가 공중에 떠 있는 시간 = 뛰는 높이(간격)
 var animation;
 
 function animate(){
@@ -77,19 +77,27 @@ function animate(){
         //현재 해당 장애물을 그림
     })
 
+
+    //dino의 기본 좌표(x,y) = (10,200)
     if(jump == true){
         dino.y--;
+        //space를 눌러서 jump의 상태가 ture일때(뛰는 중일때) 200에서 --를 해서 위로 이동
+        // console.log(dino.y);
         jumpTimer++;
     }
     if(jump == false){
+        //뛰는 상태가 아닐때
         if(dino.y < 200){
+            //200보다 작으면(위에 있으면)
             dino.y++;
+            //dino의 위치를 ++해서 내림
         }
         
     }
     if(jumpTimer > 100){
         jump = false;
         jumpTimer = 0;
+        //점프타이머 초기화
     }
     dino.draw();
     
@@ -97,11 +105,12 @@ function animate(){
 
 animate();
 
-//충돌
+//충돌 함수
 function collision(dino, cactus){
     var col_x = cactus.x - (dino.x + dino.width);
+    //x축 충돌 확인
     var col_Y = cactus.y - (dino.y + dino.height);
-
+    //y축 충돌 확인
     if(col_x < 0 && col_Y < 0){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         cancelAnimationFrame(animation);
