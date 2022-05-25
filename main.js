@@ -1,7 +1,7 @@
 var canvas = document.getElementById('canvas');
 //canvas를 id로 가져옴
 var ctx = canvas.getContext('2d');
-
+//ctx는 2D 지정
 
 canvas.width = window.innerWidth - 100;
 canvas.height = window.innerHeight - 100;
